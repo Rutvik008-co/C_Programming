@@ -1,77 +1,125 @@
+// Accept N numbers from user and return product of all odd elements.
+
 /*
-Start
-
-Read the number of elements (iLength).
-
-Read all elements into the array.
-
-Set iProduct = 1 and flag = false.
-
-For each element in the array:
-
-If the element is odd, multiply it into iProduct and set flag = true.
-
-If no odd element was found (flag == false), set iProduct = 0.
-
-Print/return iProduct.
-
-Stop.
+    Algorithm
+        Start
+            Accept the N values from user and
+            return product of all odd elements.
+        Stop
 */
+
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Required Header file                                                       //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
 
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Function Name : Range                                                      //
+//  Description :   Product of all odd elements                                //
+//  Input   :       int                                                        //
+//  Output  :       int                                                        //
+//  Author  :       Rutvik Bibhishan Kamble                                    //
+//  Date    :       16/11/2025                                                 //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
+
 typedef int * IPTR ;
 
-int Product(int Arr[], int iSize)
+int Product(int Arr[], int iLength)
 {
-    int iCnt = 0, iProduct = 1;
+    int iCnt = 0, product = 1;
     bool bFlag = false;
 
-    for(iCnt = 0; iCnt < iSize; iCnt++)
+    for(iCnt = 0; iCnt < iLength; iCnt++)
     {
         if(Arr[iCnt] % 2 != 0)
         {
-            iProduct = iProduct * Arr[iCnt]; 
-            bFlag = true;   
+            product = product * Arr[iCnt];
+            bFlag = true;
         }
     }
     if(bFlag == false)
     {
-        iProduct = 0;
+        product = 0;
     }
 
-    return iProduct;
+    return product;
 }
+
+/////////////////////////////////////////////////////////////////////////////////
+// End of Product                                                              //
+/////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Entry point functon of the program                                         //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
+
 int main()
 {
-    int iLength = 0, iCnt = 0, iRet = 0;
-    IPTR iPtr = NULL;
+    int iSize = 0, iCnt = 0, iRet = 0;
+    IPTR p = NULL;
 
-    printf("Enter the number of elements :");
-    scanf("%d", &iLength);
+    printf("Enter number of elements : ");
+    scanf("%d",&iSize);
 
-    // Step 1 : Allocate the memory
-    iPtr = (IPTR)malloc(iLength * sizeof(int));
-    if(NULL == iPtr)
+    p = (IPTR)malloc(iSize * sizeof(int));
+
+    if(p == NULL)
     {
-        printf("Unable to allocate the memory \n");
+        printf("Unable to allocate memory");
         return -1;
     }
 
-    printf("Enter %d the values : \n", iLength);
+    printf("Enter %d element \n",iSize);
 
-    for(iCnt = 0; iCnt < iLength; iCnt++)
+    for(iCnt = 0; iCnt < iSize; iCnt++)
     {
-        scanf("%d",&iPtr[iCnt]);
+        printf("Enter %dst element : ",iCnt+1);
+        scanf("%d",&p[iCnt]);
     }
 
-    iRet = Product(iPtr, iLength);
+    iRet =  Product(p, iSize);
 
-    printf("The product of all odd elements is %d\n", iRet);
-
-    free(iPtr);
+    printf ("The Product of all Odd elements is : %d",iRet);
 
     return 0;
 }
+
+/////////////////////////////////////////////////////////////////////////////////
+// End of main                                                                 //
+/////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Testcases successfully handled by the application                          //
+//                                                                             //
+//  Input :                                                                    //
+//          Enter number of elements : 5                                       //            //
+//          Enter 5 element                                                    //
+//          Enter 1st element : 13                                             //
+//          Enter 2nd element : 12                                             //
+//          Enter 3rd element : 2                                              //
+//          Enter 4th element : 3                                              //
+//          Enter 5th element : 8                                              //
+//  Output :                                                                   //
+//          The Product of all Odd elements is : 39                            // 
+//                                                                             //                                                         
+//  Input :                                                                    //
+//          Enter number of elements : 5                                       //
+//          Enter 5 element                                                    //
+//          Enter 1st element : 12                                             //
+//          Enter 2nd element : 44                                             //
+//          Enter 3rd element : 56                                             //
+//          Enter 4th element : 90                                             //
+//          Enter 5th element : 128                                            //
+//  Output :                                                                   //
+//          The Product of all Odd elements is : 39                            //                                                                                                                      //
+/////////////////////////////////////////////////////////////////////////////////

@@ -1,78 +1,135 @@
-/*Start
+// Accept N numbers from user and accept one another number asNo, 
+// return index of list occerance of that No.
 
-Read the number of elements iLength.
-
-Allocate memory and read all array elements.
-
-Read the number iValue to search.
-
-Traverse the array from the last index toward 0:
-
-If Arr[i] == iValue, return index i.
-
-If no match is found, return -1.
-
-Stop.
+/*
+    Algorithm
+        Start
+            Accept the N values from user
+            Accept the 1 another value from user and
+            Check that value is present in it or not
+        Stop
 */
 
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Required Header file                                                       //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
+
+// Typedef
 #include<stdio.h>
 #include<stdlib.h>
-#include<stdbool.h>
 
-typedef int * IPTR ;
+// Define
+#define TRUE 1
+#define FALSE -1
 
-int LastOcc(int Arr[], int iSize, int iNo)
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Function Name : LastOcc                                                  //
+//  Description :   Count of even number                                       //
+//  Input   :       int                                                        //
+//  Output  :       int                                                        //
+//  Author  :       Rutvik Bibhishan Kamble                                    //
+//  Date    :       16/11/2025                                                 //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
+
+int LastOcc(int Arr[], int iLength, int iNo)
 {
-    int iCnt = 0, iRet = -1;
-
-    for(iCnt = iSize-1; iCnt >= 0; iCnt--)
-    {
-        if(Arr[iCnt] == iNo)
-        {
-            iRet = iCnt;
-            break;
-        }
-    }
-    return iRet;
-}
-int main()
-{
-    int iLength = 0, iCnt = 0, iValue = 0, iRet = 0;
-    IPTR iPtr = NULL;
-
-    printf("Enter the number of elements :");
-    scanf("%d", &iLength);
-
-    // Step 1 : Allocate the memory
-    iPtr = (IPTR)malloc(iLength * sizeof(int));
-    if(NULL == iPtr)
-    {
-        printf("Unable to allocate the memory \n");
-        return -1;
-    }
-
-    printf("Enter %d values : \n", iLength);
+    int iCnt = 0, iCount1 = 0, iCount2 = 0;
 
     for(iCnt = 0; iCnt < iLength; iCnt++)
     {
-        scanf("%d",&iPtr[iCnt]);
+        if(Arr[iCnt] == iNo)
+        {
+            iCount1++;
+        }
+        else
+        {
+            iCount2++;
+        }
     }
-    
-    printf("Enter the number to find its last occurrence : ");
-    scanf("%d", &iValue);
+    return iCount1 - iCount2;
+}
 
-    iRet = LastOcc(iPtr, iLength, iValue);
+/////////////////////////////////////////////////////////////////////////////////
+// End of LastOcc                                                              //
+/////////////////////////////////////////////////////////////////////////////////
 
-    if(iRet == -1)
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Entry point functon of the program                                         //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
+
+int main()
+{
+    int iSize = 0, iRet = 0, iCnt = 0, iValue = 0;
+    int *p = NULL;
+
+    printf("Enter number of elements : ");
+    scanf("%d",&iSize);
+
+    printf("Enter number : ");
+    scanf("%d",&iValue);
+
+    p = (int*)malloc(iSize * sizeof(int));
+
+    if(p == NULL)
     {
-        printf("There is no such number");
-    }
-    else 
-    {
-        printf("Last occurrence of number is at index %d",iRet);
+        printf("Unable to allocate memory");
+        return -1;
     }
 
-    free(iPtr);
+    printf("Enter %d element \n",iSize);
+
+    for(iCnt = 0; iCnt < iSize; iCnt++)
+    {
+        printf("Enter %dst element : ",iCnt+1);
+        scanf("%d",&p[iCnt]);
+    }
+
+    iRet = LastOcc(p, iSize, iValue);
+
+    if(iRet < 0)
+    {
+        iRet = -iRet;
+    }
+
+    printf("%d",iRet);
     
     return 0;
 }
+
+/////////////////////////////////////////////////////////////////////////////////
+// End of main                                                                 //
+/////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Testcases successfully handled by the application                          //
+//                                                                             //
+//  Input :                                                                    //
+//          Enter number of elements : 5                                       //            //
+//          Enter number : 3                                                   //
+//          Enter 4 element                                                    //
+//          Enter 1st element : 1                                              //
+//          Enter 2nd element : 2                                              //
+//          Enter 3rd element : 3                                              //
+//          Enter 4th element : 6                                              //
+//          Enter 5th element : 6                                              //
+//  Output :                                                                   //
+//          3                                                                  //                                                         
+//  Input :                                                                    //
+//          Enter number of elements : 4                                       //
+//          Enter number : 3                                                   //
+//          Enter 4 element                                                    //
+//          Enter 1st element : 1                                              //
+//          Enter 2st element : 3                                              //
+//          Enter 3st element : 4                                              //
+//          Enter 4st element : 6                                              //
+//  Output :                                                                   //
+//          2                                                                  //                                                                                                                      //
+/////////////////////////////////////////////////////////////////////////////////

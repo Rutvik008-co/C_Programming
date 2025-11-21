@@ -1,72 +1,120 @@
+// Accept N numbers from user and accept Range, Display all elements from that range
+
+
 /*
-Start
-
-Read number of elements (iLength).
-
-Read all array elements.
-
-Read starting value (iStart) and ending value (iEnd).
-
-Traverse the array from index 0 to iLength - 1:
-
-    If element is between iStart and iEnd:
-        Display the element.
-
-Stop.
+    Algorithm
+        Start
+            Accept the N values from user
+            Accept the 1 another value from user and
+            print range between tow numbers
+        Stop
 */
 
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Required Header file                                                       //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<stdbool.h>
 
-typedef int * IPTR ;
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Function Name : Range                                                      //
+//  Description :   first occurance of the No                                  //
+//  Input   :       int                                                        //
+//  Output  :       void                                                       //
+//  Author  :       Rutvik Bibhishan Kamble                                    //
+//  Date    :       16/11/2025                                                 //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
 
-void Range(int Arr[], int iSize, int iStart, int iEnd)
+void Range(int Arr[], int iLength, int iNo1, int iNo2)
 {
-    int iCnt = 0;
+    int iCnt = 0, iCount = 0;
 
-    for(iCnt = 0; iCnt < iSize; iCnt++)
+    for(iCnt = 0; iCnt < iLength; iCnt++)
     {
-        if(Arr[iCnt]>= iStart && Arr[iCnt]<= iEnd)
+        if(Arr[iCnt] > iNo1 && Arr[iCnt] < iNo2)
         {
             printf("%d\t",Arr[iCnt]);
         }
     }
 }
 
+/////////////////////////////////////////////////////////////////////////////////
+// End of Range                                                                //
+/////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Entry point functon of the program                                         //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
+
 int main()
 {
-    int iLength = 0, iCnt = 0, iValue1 = 0,iValue2 = 0;
-    IPTR iPtr = NULL;
+    int iSize = 0, iCnt = 0, iValue1 = 0, iValue2 = 0;
+    int *p = NULL;
 
-    printf("Enter the number of elements :");
-    scanf("%d", &iLength);
+    printf("Enter number of elements : ");
+    scanf("%d",&iSize);
 
-    // Step 1 : Allocate the memory
-    iPtr = (IPTR)malloc(iLength * sizeof(int));
-    if(NULL == iPtr)
+    printf("Enter range : ");
+    scanf("%d %d",&iValue1,&iValue2);
+
+    p = (int*)malloc(iSize * sizeof(int));
+
+    if(p == NULL)
     {
-        printf("Unable to allocate the memory \n");
+        printf("Unable to allocate memory");
         return -1;
     }
 
-    printf("Enter %d the values : \n", iLength);
+    printf("Enter %d element \n",iSize);
 
-    for(iCnt = 0; iCnt < iLength; iCnt++)
+    for(iCnt = 0; iCnt < iSize; iCnt++)
     {
-        scanf("%d",&iPtr[iCnt]);
+        printf("Enter %dst element : ",iCnt+1);
+        scanf("%d",&p[iCnt]);
     }
-    
-    printf("Enter the staring point : ");
-    scanf("%d", &iValue1);
 
-    printf("Enter the ending point : ");
-    scanf("%d", &iValue2);
-
-    Range(iPtr, iLength, iValue1, iValue2);
-
-    free(iPtr);
+    Range(p, iSize, iValue1,iValue2);
 
     return 0;
 }
+
+/////////////////////////////////////////////////////////////////////////////////
+// End of main                                                                 //
+/////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+//  Testcases successfully handled by the application                          //
+//                                                                             //
+//  Input :                                                                    //
+//          Enter number of elements : 5                                       //            //
+//          Enter range : 3                                                    //
+//          5                                                                  //
+//          Enter 4 element                                                    //
+//          Enter 1st element : 1                                              //
+//          Enter 2nd element : 2                                              //
+//          Enter 3rd element : 3                                              //
+//          Enter 4th element : 4                                              //
+//          Enter 5th element : 5                                              //
+//  Output :                                                                   //
+//          3   4                                                              //                                                         
+//  Input :                                                                    //
+//          Enter number of elements : 5                                       //
+//          Enter number : 60                                                  //
+//          90                                                                 //
+//          Enter 5 element                                                    //
+//          Enter 1st element : 60                                             //
+//          Enter 2nd element : 70                                             //
+//          Enter 3rd element : 80                                             //
+//          Enter 4th element : 90                                             //
+//          Enter 5th element : 100                                            //
+//  Output :                                                                   //
+//          70  80                                                             //                                                                                                                      //
+/////////////////////////////////////////////////////////////////////////////////
